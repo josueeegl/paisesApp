@@ -1,0 +1,34 @@
+<div class="animate__animated animate__fadeIn animate__fast">
+  <h2>POR PAÍS</h2>
+  <hr />
+
+  <div class="row">
+    <div class="col">
+      <app-country-input
+        (onEnter)="search($event)"
+        (onDebounce)="suggestions($event)"
+        placeHolder="buscar país..."
+      ></app-country-input>
+    </div>
+  </div>
+
+  <ul *ngIf="suggestionsShow" class="list-group">
+    <app-country-suggestions
+      [suggestedCountries]="suggestedCountries"
+      [value]="value"
+      (onEnter)="search($event)"
+    ></app-country-suggestions>
+  </ul>
+
+  <hr />
+</div>
+
+<div class="alert alert-danger" *ngIf="isError">
+  No se encontró el término '{{ value }}'
+</div>
+
+<div class="row" *ngIf="countries.length > 0">
+  <div class="col">
+    <app-country-table [countries]="countries"></app-country-table>
+  </div>
+</div>
